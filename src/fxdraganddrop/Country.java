@@ -11,7 +11,7 @@ import java.io.Serializable;
  *
  * @author ddren
  */
-public class Fruit  implements Serializable
+public class Country  implements Serializable
 {
 	/**
 	 *
@@ -20,7 +20,7 @@ public class Fruit  implements Serializable
 
 	private String name = "";
 
-	public Fruit(String name)
+	public Country(String name)
 	{
 		this.name = name;
 	}

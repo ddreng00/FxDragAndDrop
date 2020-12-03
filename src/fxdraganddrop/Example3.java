@@ -33,8 +33,8 @@ import javafx.stage.Stage;
 public class Example3 extends Application
 {
 	// Create the ListViews
-	ListView<Fruit> sourceView = new ListView<>();
-	ListView<Fruit> targetView = new ListView<>();
+	ListView<Country> sourceView = new ListView<>();
+	ListView<Country> targetView = new ListView<>();
 
 	// Create the LoggingArea
 	TextArea loggingArea = new TextArea("");
@@ -174,23 +174,23 @@ public class Example3 extends Application
 	}
 
 	// Create the Fruit List
-	private ObservableList<Fruit> getFruitList()
+	private ObservableList<Country> getFruitList()
 	{
-		ObservableList<Fruit> list = FXCollections.<Fruit>observableArrayList();
+		ObservableList<Country> list = FXCollections.<Country>observableArrayList();
 
-		Fruit apple = new Fruit("Apple");
-		Fruit orange = new Fruit("Orange");
-		Fruit papaya = new Fruit("Papaya");
-		Fruit mango = new Fruit("Mango");
-		Fruit grape = new Fruit("Grape");
-		Fruit guava = new Fruit("Guava");
+		Country australia = new Country("Australia");
+		Country america = new Country("America");
+		Country russia = new Country("Russia");
+		Country india = new Country("India");
+		Country china = new Country("China");
+		Country japan = new Country("Japan");
 
-		list.addAll(apple, orange, papaya, mango, grape, guava);
+		list.addAll(australia, america, russia, india, china, japan);
 
 		return list;
 	}
 
-	private void dragDetected(MouseEvent event, ListView<Fruit> listView)
+	private void dragDetected(MouseEvent event, ListView<Country> listView)
 	{
 		// Make sure at least one item is selected
 		int selectedCount = listView.getSelectionModel().getSelectedIndices().size();
@@ -205,7 +205,7 @@ public class Example3 extends Application
 		Dragboard dragboard = listView.startDragAndDrop(TransferMode.COPY_OR_MOVE);
 
 		// Put the the selected items to the dragboard
-		ArrayList<Fruit> selectedItems = this.getSelectedFruits(listView);
+		ArrayList<Country> selectedItems = this.getSelectedFruits(listView);
 
 		ClipboardContent content = new ClipboardContent();
 		content.put(FRUIT_LIST, selectedItems);
@@ -214,7 +214,7 @@ public class Example3 extends Application
 		event.consume();
 	}
 
-	private void dragOver(DragEvent event, ListView<Fruit> listView)
+	private void dragOver(DragEvent event, ListView<Country> listView)
 	{
 		// If drag board has an ITEM_LIST and it is not being dragged
 		// over itself, we accept the MOVE transfer mode
@@ -229,7 +229,7 @@ public class Example3 extends Application
 	}
 
 	@SuppressWarnings("unchecked")
-	private void dragDropped(DragEvent event, ListView<Fruit> listView)
+	private void dragDropped(DragEvent event, ListView<Country> listView)
 	{
 		boolean dragCompleted = false;
 
@@ -238,7 +238,7 @@ public class Example3 extends Application
 
 		if(dragboard.hasContent(FRUIT_LIST))
 		{
-			ArrayList<Fruit> list = (ArrayList<Fruit>)dragboard.getContent(FRUIT_LIST);
+			ArrayList<Country> list = (ArrayList<Country>)dragboard.getContent(FRUIT_LIST);
 			listView.getItems().addAll(list);
 			// Data transfer is successful
 			dragCompleted = true;
@@ -249,7 +249,7 @@ public class Example3 extends Application
 		event.consume();
 	}
 
-	private void dragDone(DragEvent event, ListView<Fruit> listView)
+	private void dragDone(DragEvent event, ListView<Country> listView)
 	{
 		// Check how data was transfered to the target
 		// If it was moved, clear the selected items
@@ -263,21 +263,21 @@ public class Example3 extends Application
 		event.consume();
 	}
 
-	private ArrayList<Fruit> getSelectedFruits(ListView<Fruit> listView)
+	private ArrayList<Country> getSelectedFruits(ListView<Country> listView)
 	{
 		// Return the list of selected Fruit in an ArratyList, so it is
 		// serializable and can be stored in a Dragboard.
-		ArrayList<Fruit> list = new ArrayList<>(listView.getSelectionModel().getSelectedItems());
+		ArrayList<Country> list = new ArrayList<>(listView.getSelectionModel().getSelectedItems());
 
 		return list;
 	}
 
-	private void removeSelectedFruits(ListView<Fruit> listView)
+	private void removeSelectedFruits(ListView<Country> listView)
 	{
 		// Get all selected Fruits in a separate list to avoid the shared list issue
-		List<Fruit> selectedList = new ArrayList<>();
+		List<Country> selectedList = new ArrayList<>();
 
-		for(Fruit fruit : listView.getSelectionModel().getSelectedItems())
+		for(Country fruit : listView.getSelectionModel().getSelectedItems())
 		{
 			selectedList.add(fruit);
 		}
